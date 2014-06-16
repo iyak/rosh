@@ -6,11 +6,9 @@ int execve_path(char *name, char *argp[], char *const *envp)
     const int lenArgWithPath = 128;
     int i, j, k;
     char *path, *argWithPath = NULL;
-    if (-1 == access(name, F_OK))
-    {
+    if (-1 == access(name, F_OK)) {
         for (i = 0; NULL != envp[i] && !mystrbgn(envp[i], "PATH="); ++ i) ;
-        if (NULL == envp[i]) 
-        {
+        if (NULL == envp[i]) {
             myerror("path not found");
             return -1;
         }
@@ -18,23 +16,19 @@ int execve_path(char *name, char *argp[], char *const *envp)
         if (NULL == (argWithPath = (char *)malloc(lenArgWithPath)))
             return -1;
         j = k = 5;
-        do
-        {
-            if ( '\0' == path[j] || ':' == path[j])
-            {
+        do {
+            if ( '\0' == path[j] || ':' == path[j]) {
                 argWithPath[j - k] = '/';
                 argWithPath[j - k + 1] = '\0';
                 mystrcat(argWithPath, name);
-                if (-1 == access(argWithPath, F_OK))
-                {
+                if (-1 == access(argWithPath, F_OK)) {
                     k = j + 1;
                     continue;
                 }
                 mystrcpy(name, argWithPath);
                 mystrcpy(argp[0], argWithPath);
                 break;
-            }
-            else
+            } else
                 argWithPath[j - k] = path[j];
         } while ('\0' != path[j] && ++ j);
     }
