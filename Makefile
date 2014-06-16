@@ -31,7 +31,7 @@ endif
 
 $(TARGET): $(OBJS) Makefile
 	@echo linking $(OBJS)
-	$(CC) $(CFLAGS) -o $@ $(OBJS) $(LDFLAGS)
+	@$(CC) $(CFLAGS) -o $@ $(OBJS) $(LDFLAGS)
 
 -include $(DEPS)
 %.o:%.c Makefile
