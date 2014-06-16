@@ -10,6 +10,5 @@ simple shell program [for study]
 - pipeline
 - job controll
 - builtin commands
-
     cd, fg, bg, exit, jobs
     
